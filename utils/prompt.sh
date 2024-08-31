@@ -9,10 +9,10 @@ prompt() {
   TEXT=""
   ANS=""
 
-  for arg in $@; do
-    if [ $arg = "-y" ] || [ "$arg" = "--yes" ]; then
+  for arg in "$@"; do
+    if [ "$arg" = "-y" ] || [ "$arg" = "--yes" ]; then
       DEFAULT="yes"
-    elif [ $arg = "-n" ] || [ "$arg" = "--no" ]; then
+    elif [ "$arg" = "-n" ] || [ "$arg" = "--no" ]; then
       DEFAULT="no"
     else
       TEXT="$arg"
@@ -35,7 +35,7 @@ prompt() {
       return 0
     elif [ "$ANS" = "n" ]; then
       return 1
-    else
+    elif [ -z "$ANS" ]; then
       if [ "$DEFAULT" = "yes" ]; then
         return 0
       elif [ "$DEFAULT" = "no" ]; then
